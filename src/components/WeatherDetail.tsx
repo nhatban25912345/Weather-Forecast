@@ -52,12 +52,10 @@ function WeatherDetail() {
   });
 
   const setWeatherNewData = async (unit: string) => {
-    console.log(state.location);
     
     const result = await axios.get(
       `${WEATHER_BASE_URL}/data/2.5/onecall?lat=${state.location[0]}&lon=${state.location[1]}&exclude="hourly,minutely"&units=${unit}&appid=${WEATHER_API_KEY}`,
     );
-    console.log(result);
     
     dispatch(setWeatherData(result.data));
   };

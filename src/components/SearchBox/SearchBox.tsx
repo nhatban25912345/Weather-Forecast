@@ -42,14 +42,12 @@ function SearchBox() {
       dataLocation.then(async (res: DataItem[]) => {
         if (res.length === 1) {
           const data = res[0];
-          console.log([data.lat, data.lon]);
           setSearchData(res);
           dispatch(setLocationData([data.lat, data.lon]));
           dispatch(setLocationName(`${data.name}, ${data.country}`));
           const result = await axios.get(
             `${WEATHER_BASE_URL}/data/2.5/onecall?lat=${data.lat}&lon=${data.lon}&exclude=${"hourly,minutely"}&units=${state.unit}&appid=${WEATHER_API_KEY}`,
           );
-          console.log(result.data);
           dispatch(setWeatherData(result.data));
           dispatch(setDay(0));
           dispatch(setUnit("metric"));
